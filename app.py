@@ -9,8 +9,8 @@ app = Flask(__name__)
 def hello_chess_snapshot():
     return 'Hello, Chess Snapshot!'
 
-@app.route('/process_image', methods=['POST'])
-def process_image():
+@app.route('/get_chess_position', methods=['POST'])
+def get_chess_position():
     if 'image' not in request.files:
         return 'No image uploaded', 400
 
