@@ -5,6 +5,10 @@ from detectors.chess_position_detector import ChessPositionDetector
 
 app = Flask(__name__)
 
+@app.route('/')
+def hello_chess_snapshot():
+    return 'Hello, Chess Snapshot!'
+
 @app.route('/process_image', methods=['POST'])
 def process_image():
     if 'image' not in request.files:
