@@ -2,7 +2,7 @@ from utils.drawing import draw_lines, draw_points
 from utils.intersections_detector import IntersectionsDetector
 from utils.lines_detector import LinesDetector
 from utils.llr import LLR, llr_pad
-from utils.other import resize_image, order_corners, bound_corners, perspective_transform
+from utils.other import resize_image, order_corners, bound_corners, perspective_transform, point_transform
 
 
 class ChessboardDetector:
@@ -14,6 +14,7 @@ class ChessboardDetector:
         self.intersections = []
         self.lines = []
         self.corners = []
+        self.transform_matrices = []
 
     def set_image(self, image):
         self.original_image = image.copy()
@@ -21,6 +22,7 @@ class ChessboardDetector:
         self.intersections = []
         self.lines = []
         self.corners = []
+        self.transform_matrices = []
         return self.image
 
     def detect_lines(self):
@@ -39,8 +41,12 @@ class ChessboardDetector:
         return self.corners
 
     def transform(self):
-        self.image = perspective_transform(self.image, self.corners)
+        self.image, transform_matrix = perspective_transform(self.image, self.corners)
+        self.transform_matrices.append(transform_matrix)
         return self.image
+
+    def transform_point(self, point):
+        return point_transform(point, self.transform_matrices)
 
     def detect_components(self):
         self.detect_lines()

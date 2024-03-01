@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify
 import cv2 as cv
 import numpy as np
+
+from flask import Flask, request, jsonify
 from detectors.chess_position_detector import ChessPositionDetector
+
 
 app = Flask(__name__)
 
