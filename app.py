@@ -35,7 +35,7 @@ def get_best_move():
 
     stockfish = Stockfish(path='./stockfish/stockfish-16.1')
     stockfish.set_fen_position(fen)
-    best_move = stockfish.get_best_move_time(100)
+    best_move = stockfish.get_best_move()
 
     return jsonify({'best_move': best_move})
 
